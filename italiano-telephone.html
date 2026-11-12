@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entraînement d’italien</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F5F8;--card:#fff;--ink:#1B2433;--mute:#5B6577;--line:#D7DCE4;--acc:#0F4C81;--accink:#fff;--ok:#1E7B4F;--okbg:#E4F3EB;--ko:#B83A27;--kobg:#FBE9E6;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10151C;--card:#1A212B;--ink:#E7EBF1;--mute:#9AA5B6;--line:#2E3745;--acc:#7DB3EE;--accink:#0C1A2B;--ok:#6FD3A2;--okbg:#16342A;--ko:#FF9C8A;--kobg:#3A1E1A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10151C;--card:#1A212B;--ink:#E7EBF1;--mute:#9AA5B6;--line:#2E3745;--acc:#7DB3EE;--accink:#0C1A2B;--ok:#6FD3A2;--okbg:#16342A;--ko:#FF9C8A;--kobg:#3A1E1A;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
+[hidden]{display:none!important}
+main{max-width:640px;margin:0 auto;padding:20px 16px 48px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:1.25rem;margin:0;font-weight:700}
+.score{color:var(--mute);font-size:.9rem}
+button{font:inherit;cursor:pointer}
+.link{background:none;border:0;color:var(--mute);text-decoration:underline;padding:4px;margin-left:6px}
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:12px}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 12px;color:var(--mute);font-weight:600;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--acc)}
+.sw{display:flex;align-items:center;gap:8px;margin-bottom:16px;color:var(--mute);font-size:.95rem}
+.sw input{width:18px;height:18px;accent-color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px 20px}
+.ins{margin:0 0 12px;color:var(--mute)}
+.sen{margin:0;font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.25;font-weight:600}
+.sub{margin:8px 0 20px;color:var(--mute);min-height:1.5em}
+.gap{display:inline-block;width:3.2ch;border-bottom:3px solid var(--acc);vertical-align:baseline}
+.vb{color:var(--acc)}
+input[type=text]{width:100%;font:inherit;font-size:1.2rem;padding:12px 14px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+input[type=text]:focus{border-color:var(--acc);outline:none}
+input[type=text]:disabled{opacity:.7}
+.chars{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 16px}
+.chars button{min-width:40px;padding:6px 10px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;font-size:1.05rem}
+.act{display:flex;gap:10px;flex-wrap:wrap}
+.pri,.sec{padding:11px 18px;border-radius:8px;font-weight:600}
+.pri{background:var(--acc);color:var(--accink);border:2px solid var(--acc)}
+.sec{background:none;color:var(--ink);border:2px solid var(--line)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.fb{margin-top:20px;padding:16px;border-radius:8px;border-left:5px solid}
+.fb.ok{background:var(--okbg);border-color:var(--ok)}
+.fb.ko{background:var(--kobg);border-color:var(--ko)}
+.fb strong{font-size:1.1rem}
+.fb p{margin:6px 0}
+.conj{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:4px 12px;margin-top:10px;font-size:.95rem}
+.conj i{color:var(--mute);font-style:normal;margin-right:4px}
+.conj .hit{font-weight:700}
+.note{color:var(--mute);font-size:.92rem;margin:8px 0 0}
+.tw{overflow-x:auto;margin:8px 0 12px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--mute);font-weight:600}
+td.irr{font-weight:700;color:var(--acc)}
+h2{font-size:1.05rem;margin:24px 0 4px}
+h2:first-child{margin-top:0}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Entraînement d’italien</h1>
+<div class="score" aria-live="polite"><span id="sc"></span><button id="rs" class="link" type="button">Remettre à zéro</button></div>
+</header>
+<div class="tabs" role="tablist" id="tabs">
+<button role="tab" data-t="mix" aria-selected="true">Mélange</button>
+<button role="tab" data-t="present" aria-selected="false">Présent</button>
+<button role="tab" data-t="part" aria-selected="false">Participe passé</button>
+<button role="tab" data-t="passive" aria-selected="false">Voix passive</button>
+<button role="tab" data-t="err" id="te" aria-selected="false">Mes erreurs (0)</button>
+<button role="tab" data-t="ref" aria-selected="false">Fiche</button>
+</div>
+<label class="sw" id="irrw"><input type="checkbox" id="irr"> Seulement les verbes irréguliers</label>
+<section class="card" id="card">
+<p class="ins" id="ins"></p>
+<p class="sen" id="sen"></p>
+<p class="sub" id="sub"></p>
+<input type="text" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Ta réponse" placeholder="Ta réponse">
+<div class="chars" id="chars" aria-label="Caractères spéciaux"></div>
+<div class="act">
+<button class="pri" id="ck" type="button">Vérifier</button>
+<button class="sec" id="rv" type="button">Voir la réponse</button>
+<button class="pri" id="nx" type="button" hidden>Question suivante</button>
+</div>
+<div id="fb" class="fb" role="status" hidden></div>
+</section>
+<section class="card" id="ref" hidden></section>
+</main>
+<script>
+const IRR={essere:["sono","sei","è","siamo","siete","sono"],avere:["ho","hai","ha","abbiamo","avete","hanno"],andare:["vado","vai","va","andiamo","andate","vanno"],fare:["faccio","fai","fa","facciamo","fate","fanno"],stare:["sto","stai","sta","stiamo","state","stanno"],dare:["do","dai","dà","diamo","date","danno"],dire:["dico","dici","dice","diciamo","dite","dicono"],venire:["vengo","vieni","viene","veniamo","venite","vengono"],potere:["posso","puoi","può","possiamo","potete","possono"],volere:["voglio","vuoi","vuole","vogliamo","volete","vogliono"],dovere:["devo","devi","deve","dobbiamo","dovete","devono"],sapere:["so","sai","sa","sappiamo","sapete","sanno"],uscire:["esco","esci","esce","usciamo","uscite","escono"],bere:["bevo","bevi","beve","beviamo","bevete","bevono"],tenere:["tengo","tieni","tiene","teniamo","tenete","tengono"],scegliere:["scelgo","scegli","sceglie","scegliamo","scegliete","scelgono"],rimanere:["rimango","rimani","rimane","rimaniamo","rimanete","rimangono"],salire:["salgo","sali","sale","saliamo","salite","salgono"],morire:["muoio","muori","muore","moriamo","morite","muoiono"],tradurre:["traduco","traduci","traduce","traduciamo","traducete","traducono"]};
+const ISC=["finire","capire","preferire"];
+const V=[["parlare","parler","italiano"],["mangiare","manger","una pizza"],["lavorare","travailler","a Milano"],["abitare","habiter","a Roma"],["studiare","étudier","ogni giorno"],["comprare","acheter","il pane"],["vendere","vendre","la macchina"],["leggere","lire","un libro","letto"],["scrivere","écrire","una mail","scritto"],["prendere","prendre","il treno","preso"],["vedere","voir","un film","visto"],["chiudere","fermer","la porta","chiuso"],["mettere","mettre","i libri sul tavolo","messo"],["rispondere","répondre","al telefono","risposto"],["partire","partir","domani"],["aprire","ouvrir","la finestra","aperto"],["dormire","dormir","poco"],["finire","finir","il lavoro"],["capire","comprendre","tutto"],["preferire","préférer","il tè"],["chiedere","demander","un favore","chiesto"],["vincere","gagner","la partita","vinto"],["perdere","perdre","le chiavi","perso"],["spendere","dépenser","troppo","speso"],["offrire","offrir","un caffè","offerto"],["essere","être","a casa","stato"],["avere","avoir","fame"],["andare","aller","al mercato"],["fare","faire","colazione","fatto"],["stare","être / rester","bene","stato"],["dare","donner","un regalo a Marco"],["dire","dire","la verità","detto"],["venire","venir","con noi","venuto"],["potere","pouvoir","venire domani"],["volere","vouloir","un caffè"],["dovere","devoir","studiare"],["sapere","savoir","la risposta"],["uscire","sortir","alle otto"],["bere","boire","un’acqua","bevuto"],["tenere","tenir","il libro"],["scegliere","choisir","il regalo","scelto"],["rimanere","rester","a casa","rimasto"],["salire","monter","sul treno"],["morire","mourir","di fame","morto"],["tradurre","traduire","una frase","tradotto"],["nascere","naître","a Torino","nato"],["vivere","vivre","in Francia","vissuto"],["decidere","décider","subito","deciso"],["conoscere","connaître","Marco","conosciuto"],["correre","courir","ogni mattina","corso"],["tornare","revenir","a casa"],["arrivare","arriver","in ritardo"],["guardare","regarder","la televisione"]];
+const P=[["legge","leggono","letto",["il libro:ms","i libri:mp","la lettera:fs","le lettere:fp","il giornale:ms"]],["scrive","scrivono","scritto",["la lettera:fs","le lettere:fp","l’email:fs","i compiti:mp","il libro:ms"]],["apre","aprono","aperto",["la porta:fs","la finestra:fs","le finestre:fp","il negozio:ms","le porte:fp"]],["chiude","chiudono","chiuso",["la porta:fs","le finestre:fp","il negozio:ms","i negozi:mp","la cassa:fs"]],["prende","prendono","preso",["il treno:ms","i biglietti:mp","la decisione:fs","le decisioni:fp","l’autobus:ms"]],["vede","vedono","visto",["il film:ms","i film:mp","la mostra:fs","la casa:fs"]],["fa","fanno","fatto",["i compiti:mp","la torta:fs","gli esercizi:mp","il lavoro:ms","le torte:fp"]],["vende","vendono","venduto",["le case:fp","la macchina:fs","i biglietti:mp","il libro:ms","le scarpe:fp"]],["sceglie","scelgono","scelto",["il regalo:ms","i candidati:mp","il film:ms","le date:fp"]],["perde","perdono","perso",["le chiavi:fp","il biglietto:ms","la partita:fs","i guanti:mp"]],["finisce","finiscono","finito",["il lavoro:ms","i compiti:mp","la lezione:fs","gli esercizi:mp"]],["prepara","preparano","preparato",["la cena:fs","le torte:fp","il pranzo:ms","gli spaghetti:mp"]],["compra","comprano","comprato",["i biglietti:mp","il regalo:ms","le scarpe:fp","la macchina:fs"]],["mangia","mangiano","mangiato",["la pizza:fs","i dolci:mp","il panino:ms","le mele:fp"]]];
+const AG=[["Marco","da Marco","s"],["Giulia","da Giulia","s"],["Il professore","dal professore","s"],["La direttrice","dalla direttrice","s"],["Gli studenti","dagli studenti","p"],["Le studentesse","dalle studentesse","p"],["Un cuoco","da un cuoco","s"],["Un’agenzia","da un’agenzia","s"],["I genitori","dai genitori","p"],["Luca e Anna","da Luca e Anna","p"],["Mia sorella","da mia sorella","s"],["I miei amici","dai miei amici","p"]];
+const SUBJ=[["Io",0],["Tu",1],["Lui",2],["Lei",2],["Noi",3],["Voi",4],["Loro",5],["Marco",2],["Giulia",2],["I ragazzi",5]];
+const PERS=["io","tu","lui/lei","noi","voi","loro"];
+const END={are:["o","i","a","iamo","ate","ano"],ere:["o","i","e","iamo","ete","ono"],ire:["o","i","e","iamo","ite","ono"]};
+const PEND={are:"ato",ere:"uto",ire:"ito"};
+const $=s=>document.querySelector(s);
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const norm=s=>s.toLowerCase().replace(/[’‘`´]/g,"'").replace(/[.!?]+$/,"").replace(/\s+/g," ").trim();
+const plain=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+function conj(i){if(IRR[i])return IRR[i];const t=i.slice(-3),st=i.slice(0,-3);if(ISC.includes(i))return[st+"isco",st+"isci",st+"isce",st+"iamo",st+"ite",st+"iscono"];return END[t].map(e=>(st+e).replace("ii","i"))}
+const part=v=>v[3]||v[0].slice(0,-3)+PEND[v[0].slice(-3)];
+let st={tab:"mix",q:null,done:false,sc:{ok:0,n:0,run:0}};
+try{const s=JSON.parse(localStorage.getItem("it-score"));if(s&&typeof s.n==="number")st.sc=s}catch(e){}
+function saveSc(){try{localStorage.setItem("it-score",JSON.stringify(st.sc))}catch(e){}$("#sc").textContent=st.sc.ok+"/"+st.sc.n+" · série "+st.sc.run}
+let miss=[];try{const m=JSON.parse(localStorage.getItem("it-miss"));if(Array.isArray(m))miss=m}catch(e){}
+const key=q=>q.ins+q.sen;
+function saveMiss(){try{localStorage.setItem("it-miss",JSON.stringify(miss))}catch(e){}$("#te").textContent="Mes erreurs ("+miss.length+")"}
+const td=c=>typeof c==="string"?"<td>"+c+"</td>":'<td class="irr">'+c.t+"</td>";
+const tb=(h,rows)=>'<div class="tw"><table><thead><tr>'+h.map(x=>"<th>"+x+"</th>").join("")+"</tr></thead><tbody>"+rows.map(r=>"<tr>"+r.map(td).join("")+"</tr>").join("")+"</tbody></table></div>";
+function renderRef(){
+ const ex=["parlare","vendere","partire","finire"].map(conj);
+ $("#ref").innerHTML="<h2>Présent : verbes réguliers</h2>"+tb(["","parlare (-are)","vendere (-ere)","partire (-ire)","finire (-isc-)"],PERS.map((p,i)=>[p,...ex.map(f=>f[i])]))+'<p class="note">Les verbes en -isc- (finire, capire, preferire...) ajoutent -isc- sauf à noi et voi. Le pronom sujet est souvent omis.</p>'
+ +"<h2>Participe passé : verbes réguliers</h2>"+tb(["Terminaison","Participe","Exemple"],[["-are","-ato","parlato"],["-ere","-uto","venduto"],["-ire","-ito","finito"]])
+ +"<h2>Verbes irréguliers au présent</h2>"+tb(["Verbe",...PERS,"Participe"],V.filter(v=>IRR[v[0]]).map(v=>[v[0]+" ("+v[1]+")",...conj(v[0]),v[3]?{t:part(v)}:part(v)]))
+ +"<h2>Participe irrégulier, présent régulier</h2>"+tb(["Verbe","Participe"],V.filter(v=>v[3]&&!IRR[v[0]]).map(v=>[v[0]+" ("+v[1]+")",{t:part(v)}]))
+ +'<p class="note">Avec essere (mouvement, changement d’état, verbes pronominaux), le participe s’accorde avec le sujet. Avec avere, pas d’accord.</p>'}
+function make(mode){
+ const irr=$("#irr").checked;
+ if(mode==="present"){const v=rnd(V.filter(x=>!irr||IRR[x[0]])),s=rnd(SUBJ),f=conj(v[0]);
+  const extra=IRR[v[0]]?"Verbe irrégulier.":ISC.includes(v[0])?"Verbe en -isc- : on ajoute -isc- sauf à noi et voi.":"Verbe régulier.";
+  return{ins:"Conjugue ce verbe au présent.",sen:s[0]+' <span class="gap"></span> <span class="vb">('+v[0]+')</span> '+v[2]+".",sub:v[0]+" : "+v[1],ans:[f[s[1]]],show:f[s[1]],
+  det:'<div class="conj">'+PERS.map((p,i)=>'<span class="'+(i===s[1]?"hit":"")+'"><i>'+p+"</i>"+f[i]+"</span>").join("")+'</div><p class="note">'+extra+"</p>"}}
+ if(mode==="part"){const v=rnd(V.filter(x=>!irr||x[3])),p=part(v),t=v[0].slice(-3);
+  return{ins:"Donne le participe passé de ce verbe.",sen:'<span class="vb">'+v[0]+"</span>",sub:v[1],ans:[p],show:p,
+  det:'<p class="note">'+(v[3]?"Participe irrégulier : "+v[0]+" → "+p+".":"Participe régulier : -"+t+" → -"+PEND[t]+".")+"</p>"}}
+ const r=rnd(P),a=rnd(AG),o=rnd(r[3]).split(":"),g=o[1],pl=g[1]==="p",pp=r[2].slice(0,-1)+{ms:"o",mp:"i",fs:"a",fp:"e"}[g];
+ const act=a[0]+" "+(a[2]==="s"?r[0]:r[1])+" "+o[0]+".",be=pl?"sono":"è",ve=pl?"vengono":"viene";
+ const main=cap(o[0])+" "+be+" "+pp+" "+a[1]+".",alt=cap(o[0])+" "+ve+" "+pp+" "+a[1]+".";
+ return{ins:"Mets cette phrase à la voix passive (présent).",sen:act,sub:"",ans:[main,alt],show:main,
+ det:'<p class="note">« '+o[0]+" » est "+(g[0]==="m"?"masculin":"féminin")+" "+(pl?"pluriel":"singulier")+" : on écrit "+be+" + participe accordé ("+pp+"), puis l’agent avec da.</p><p class=\"note\">Variante possible avec venire : "+alt+"</p>"}}
+function empty(){st.q=null;st.done=true;$("#ins").textContent="Rien à revoir pour l’instant.";$("#sen").textContent="";$("#sub").textContent="Les questions que tu rates dans les autres onglets arrivent ici.";$("#inp").value="";$("#inp").disabled=true;["#ck","#rv","#nx"].forEach(s=>$(s).hidden=true);$("#fb").hidden=true}
+function next(){if(st.tab==="err"){if(!miss.length)return empty();const cur=st.q&&key(st.q),pool=miss.length>1?miss.filter(x=>key(x)!==cur):miss;st.q=rnd(pool)}else st.q=make(st.tab==="mix"?rnd(["present","part","passive"]):st.tab);st.done=false;
+ $("#ins").textContent=st.q.ins;$("#sen").innerHTML=st.q.sen;$("#sub").textContent=st.q.sub;
+ const i=$("#inp");i.value="";i.disabled=false;$("#fb").hidden=true;$("#ck").hidden=false;$("#rv").hidden=false;$("#nx").hidden=true;i.focus()}
+function finish(ok,note){if(st.done)return;st.done=true;st.sc.n++;if(ok){st.sc.ok++;st.sc.run++}else st.sc.run=0;saveSc();const k=key(st.q);miss=miss.filter(m=>key(m)!==k);if(!ok)miss.push(st.q);miss=miss.slice(-30);saveMiss();
+ const fb=$("#fb");fb.className="fb "+(ok?"ok":"ko");
+ fb.innerHTML="<strong>"+(ok?"Giusto !":"Pas tout à fait.")+"</strong> "+note+"<p>Réponse : <b>"+st.q.show+"</b></p>"+st.q.det;fb.hidden=false;
+ $("#inp").disabled=true;$("#ck").hidden=true;$("#rv").hidden=true;$("#nx").hidden=false;$("#nx").focus()}
+function check(){if(st.done)return;const raw=$("#inp").value;if(!norm(raw)){$("#inp").focus();return}
+ let a=norm(raw);if(!st.q.show.includes(" "))a=a.split(" ").pop();
+ const ok=st.q.ans.some(x=>norm(x)===a);
+ finish(ok,!ok&&st.q.ans.some(x=>plain(norm(x))===plain(a))?"Attention à l’accent.":"")}
+$("#ck").onclick=check;$("#rv").onclick=()=>finish(false,"");$("#nx").onclick=next;
+$("#inp").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
+$("#rs").onclick=()=>{st.sc={ok:0,n:0,run:0};saveSc()};
+$("#irr").onchange=next;
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest("button[data-t]");if(!b)return;
+ st.tab=b.dataset.t;document.querySelectorAll("#tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));
+ const ref=st.tab==="ref";$("#card").hidden=ref;$("#ref").hidden=!ref;$("#irrw").hidden=ref||st.tab==="passive"||st.tab==="err";if(ref)renderRef();else next()});
+"àèéìòùu".split("").forEach(c=>{const b=document.createElement("button");b.type="button";b.textContent=c;b.setAttribute("aria-label","Insérer "+c);
+ b.onclick=()=>{const i=$("#inp");if(i.disabled)return;const s=i.selectionStart,e=i.selectionEnd;i.value=i.value.slice(0,s)+c+i.value.slice(e);i.focus();i.setSelectionRange(s+1,s+1)};$("#chars").appendChild(b)});
+saveSc();saveMiss();next();
+</script>
+</body>
+</html>
